@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify": "tsc lib/story.ts lib/game-state.ts lib/narrator.ts scripts/verify.ts --outDir .verify-out --module commonjs --target ES2017 --moduleResolution node --esModuleInterop --skipLibCheck && node .verify-out/scripts/verify.js"
   },
   "dependencies": {
     "next": "15.1.6",
