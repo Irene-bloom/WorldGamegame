@@ -10,7 +10,7 @@
     "verify": "tsc lib/story.ts lib/game-state.ts lib/narrator.ts scripts/verify.ts --outDir .verify-out --module commonjs --target ES2017 --moduleResolution node --esModuleInterop --skipLibCheck && node .verify-out/scripts/verify.js"
   },
   "dependencies": {
-    "next": "15.1.6",
+    "next": "15.1.11",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "@anthropic-ai/sdk": "^0.39.0"
