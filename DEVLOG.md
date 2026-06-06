@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-06-06 · 步骤 9：修复部署失败（升级 Next.js 到安全版本）
+
+- **现象**：Vercel 部署失败，但 Build Logs 显示 `Build Completed [32s]`、静态页都生成了。真正原因在最后一行：`Vulnerable version of Next.js detected, please update immediately.` —— Vercel 的安全策略拒绝部署带已知漏洞的 `next@15.1.6`。
+- **做了什么**：
+  - 把 `next` 与 `eslint-config-next` 从 `15.1.6` 升级到最新稳定版 **`15.5.19`**（同 15.x，无破坏性改动，修了安全漏洞）。`package-lock.json` 同步更新。
+  - 顺手做了一次 **import 大小写审计**：确认 `@/components/*`、`@/lib/*` 的 import 路径与实际文件名大小写完全一致 —— 因为 Vercel 是 Linux（大小写敏感），本地 Windows 不敏感，错配会本地能过、线上挂。结果全部一致。
+- **验证**：tsc 通过；`npm run verify` 16/16；`next build` 成功且**不再出现 Vulnerable 警告**。
+- **为什么记下来**：这是部署平台特有的坑（构建成功 ≠ 部署成功）。以后再遇到「Vulnerable version」就是升依赖；遇到本地过、线上 Module not found 多半是 import 大小写。
+- **结论 / 下一步**：推送后 Vercel 会自动重新部署，应当通过。
+
+---
+
 ## 2026-06-06 · 步骤 8：亮色主题 + 音效 + 响应式（视觉/体验改造）
 
 - **做了什么**：
