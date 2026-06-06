@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  /* 夜色花园：幽深的绿黑，远处透出一点雾光 */
+  background: radial-gradient(1200px 800px at 30% -10%, #16241c 0%, #0e1512 55%, #0a0f0c 100%);
+  color: #e8efe9;
+  min-height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3a31;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 节点 / 面板的微光描边 */
+.card-glow {
+  box-shadow: 0 0 0 1px rgba(94, 234, 212, 0.12), 0 8px 40px -12px rgba(94, 234, 212, 0.25);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop {
+  animation: pop 0.35s ease-out;
+}
+
+/* 窥见邻近线时的浮现效果 */
+@keyframes peek {
+  0% { opacity: 0; transform: translateY(6px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.animate-peek {
+  animation: peek 0.6s ease-out;
+}
