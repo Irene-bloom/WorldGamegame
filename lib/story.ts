@@ -275,3 +275,33 @@ export function getLevel(levelId: string = DEFAULT_LEVEL_ID): Level {
 export function getNode(levelId: string, nodeId: string): StoryNode | undefined {
   return getLevel(levelId).nodes[nodeId];
 }
+
+/** 图上的一条边（用于可视化分岔网） */
+export interface Edge {
+  from: string;
+  to: string;
+  /** choice = 选择分岔（实线）；observe = 跨线观察（虚线，连向邻近线） */
+  kind: "choice" | "observe";
+}
+
+/**
+ * 从关卡数据推导出所有的边：
+ *  - 每个 choice 是一条 choice 边（含被锁住的进阶选项，也画出来，表示「潜在分岔」）。
+ *  - 每个 observe 的 peek 是一条 observe 边（连向邻近线节点）。
+ * 用于 ForkGraph 画连线。
+ */
+export function getEdges(level: Level): Edge[] {
+  const edges: Edge[] = [];
+  for (const node of Object.values(level.nodes)) {
+    for (const c of node.choices) {
+      if (level.nodes[c.to]) edges.push({ from: node.id, to: c.to, kind: "choice" });
+    }
+    if (node.observe) {
+      for (const p of node.observe) {
+        if (level.nodes[p.peekNodeId])
+          edges.push({ from: node.id, to: p.peekNodeId, kind: "observe" });
+      }
+    }
+  }
+  return edges;
+}

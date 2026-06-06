@@ -9,12 +9,14 @@ import type { Choice, StoryNode } from "@/lib/story";
 export function NodePanel({
   node,
   state,
+  readOnly = false,
   onChoose,
   onBacktrack,
   onRestart,
 }: {
   node: StoryNode;
   state: GameState;
+  readOnly?: boolean;
   onChoose: (choice: Choice) => void;
   onBacktrack: () => void;
   onRestart: () => void;
@@ -55,9 +57,13 @@ export function NodePanel({
         ))}
       </div>
 
-      {/* 底部：选择 / 回溯 / 重开 */}
+      {/* 底部：选择 / 回溯 / 重开。跳读（只读）模式下不显示可操作按钮。 */}
       <div className="mt-6 space-y-3">
-        {isCenter ? (
+        {readOnly ? (
+          <p className="text-center text-xs text-mist/40 py-2">
+            —— 这是另一处分岔的景象 ——
+          </p>
+        ) : isCenter ? (
           <button
             onClick={onRestart}
             className="w-full py-3 rounded-lg font-medium transition
