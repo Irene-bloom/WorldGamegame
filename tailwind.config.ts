@@ -8,20 +8,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // 花园 / 时间迷宫 主题
-        ink: "#0e1512",       // 最深的底色(夜色花园)
-        panel: "#141d18",     // 面板
-        panel2: "#1b2722",    // 次级面板
-        vine: "#3a5a40",      // 藤蔓绿
-        mist: "#8a9a91",      // 雾灰(次要文字)
-        // 两条时间线的颜色
-        alpha: "#5eead4",     // 当前线 / alpha —— 青
-        beta: "#fbbf24",      // 邻近线 / beta —— 琥珀
-        center: "#f0abfc",    // 中心 —— 微光紫
+        // 羊皮纸植物园 · 亮色主题
+        parchment: "#f5f0e6", // 背景：暖米
+        panel: "#fffdf8",     // 面板：米白
+        panel2: "#f3ecdd",    // 次级面板：浅米
+        line: "#e2d8c3",      // 描边/分隔线
+        ink: "#3a3228",       // 主文字：深棕
+        mute: "#8a7f6c",      // 次要文字：灰棕
+        // 三种语义色（在亮底上的可读版本）
+        alpha: "#2f8f7f",     // 当前线 —— 松绿
+        beta: "#c8962a",      // 邻近线 —— 金褐
+        center: "#b06ab0",    // 中心 —— 葵紫
+        vine: "#5a7d52",      // 藤蔓绿（连线/点缀）
       },
       fontFamily: {
         sans: ['system-ui', '-apple-system', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-        serif: ['Georgia', 'Songti SC', 'SimSun', 'serif'],
+        serif: ['Georgia', 'Songti SC', 'STSong', 'SimSun', 'serif'],
       },
     },
   },

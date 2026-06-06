@@ -9,8 +9,8 @@ import { getEdges, type Level, type StoryNode } from "@/lib/story";
 import { isChoiceAvailable, type GameState } from "@/lib/game-state";
 
 const TL_COLOR: Record<string, string> = {
-  alpha: "#5eead4", // 青
-  beta: "#fbbf24", // 琥珀
+  alpha: "#2f8f7f", // 松绿
+  beta: "#c8962a", // 金褐
 };
 
 export function ForkGraph({
@@ -58,10 +58,10 @@ export function ForkGraph({
             key={`e${i}`}
             d={path}
             fill="none"
-            stroke={isObserve ? "#fbbf24" : "#3a5a40"}
+            stroke={isObserve ? "#c8962a" : "#7a9a6e"}
             strokeWidth={isObserve ? 0.4 : 0.6}
             strokeDasharray={isObserve ? "1.5 1.2" : undefined}
-            opacity={isObserve ? 0.5 : 0.8}
+            opacity={isObserve ? 0.55 : 0.75}
           />
         );
       })}
@@ -95,7 +95,7 @@ function NodeDot({
   onClick?: () => void;
 }) {
   const { x, y } = node.pos;
-  const base = node.isCenter ? "#f0abfc" : TL_COLOR[node.timeline] ?? "#8a9a91";
+  const base = node.isCenter ? "#b06ab0" : TL_COLOR[node.timeline] ?? "#8a7f6c";
 
   let fill = base;
   let stroke = base;
@@ -103,13 +103,13 @@ function NodeDot({
   let op = 1;
 
   if (isDeadEnd) {
-    fill = "#2a3a31";
-    stroke = "#4a5a51";
-    op = 0.6;
+    fill = "#d8ccb2";
+    stroke = "#b3a589";
+    op = 0.7;
   } else if (!isVisited) {
     // 已知但未亲身到达（如眼前的选项目标 / 邻近线）：空心暗示
-    fill = "transparent";
-    op = 0.9;
+    fill = "#fffdf8";
+    op = 0.95;
   }
 
   if (node.isCenter) r = 3;
@@ -130,7 +130,7 @@ function NodeDot({
       )}
       {/* 中心节点的星芒 */}
       {node.isCenter && !isDeadEnd && (
-        <circle cx={x} cy={y} r={4.2} fill="none" stroke="#f0abfc" strokeWidth={0.3} opacity={0.4} />
+        <circle cx={x} cy={y} r={4.2} fill="none" stroke="#b06ab0" strokeWidth={0.3} opacity={0.45} />
       )}
       <circle
         cx={x}
@@ -142,7 +142,7 @@ function NodeDot({
       />
       {/* 死路打叉 */}
       {isDeadEnd && (
-        <text x={x} y={y + 0.9} fontSize={2.6} textAnchor="middle" fill="#6a7a71">
+        <text x={x} y={y + 0.9} fontSize={2.6} textAnchor="middle" fill="#9a8c70">
           ✕
         </text>
       )}
@@ -152,8 +152,8 @@ function NodeDot({
         y={y + (node.isCenter ? 6 : 4.6)}
         fontSize={2.3}
         textAnchor="middle"
-        fill={isCurrent ? base : "#8a9a91"}
-        opacity={isDeadEnd ? 0.5 : 0.85}
+        fill={isCurrent ? base : "#6b6253"}
+        opacity={isDeadEnd ? 0.6 : 0.9}
       >
         {shortLabel(node.title)}
       </text>
